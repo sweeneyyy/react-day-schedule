@@ -1,0 +1,45 @@
+@import '~react-agenda/build/styles.css';
+@import '~react-datetime/css/react-datetime.css';
+
+.App {
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.App-header {
+  background-color: #41345C;
+  height: 60px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.container {
+  min-height: 70vh;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 20px 0;
+  max-width: 960px;
+}
+
+#agenda-wrapper {
+  width: 60%;
+  margin: auto;
+}
+
+/* Event Blocks */
+.handle {
+  border: 1px solid black;
+  height: 100px;
+  width: 200px;
+}
+
+.event-block {
+  color: black;
+  display: block;
+  text-align: left;
+  margin-left: 20px;
+}
