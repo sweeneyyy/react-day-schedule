@@ -1,6 +1,21 @@
+/* styles from react-agenda */
 @import '~react-agenda/build/styles.css';
 @import '~react-datetime/css/react-datetime.css';
 
+#agenda-wrapper {
+  width: 60%;
+  margin: auto;
+}
+
+.agenda__cell:hover {
+  background: none;
+} 
+
+.agenda__cell_selected {
+  background: none;
+}
+
+/* default styles */
 .App {
   text-align: center;
   box-sizing: border-box;
@@ -20,6 +35,7 @@
 h3, h4 {
   margin-left: 10px;
   color: #3e3a3a;
+  background: none;
 }
 
 .container {
@@ -28,9 +44,4 @@ h3, h4 {
   margin: 0 auto;
   padding: 20px 0;
   max-width: 960px;
-}
-
-#agenda-wrapper {
-  width: 60%;
-  margin: auto;
 }

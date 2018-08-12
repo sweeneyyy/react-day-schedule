@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ReactAgenda , ReactAgendaCtrl, guid, getLast, getFirst } from 'react-agenda';
+import { ReactAgenda , guid } from 'react-agenda';
 import moment from 'moment';
 
+// set colors for event blocks
 const colors = {
   "color-1": "rgb(46, 204, 113)",
   "color-2": "rgb(230, 126, 34)",
@@ -15,10 +16,13 @@ class DayScheduleContainer extends Component {
 
     const now = new Date();
 
+    // updated initial data set - need to go back and figure out how
+    // react-agenda will parse original strings correctly - already using moment ?
+    // drag/drop/resize would only work by replacing the id with the build in guid()
     const initialEventData = [
       {
         _id: guid(),
-        startDateTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 8, 0),
+        startDateTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 6, 0),
         endDateTime: new Date(now.getFullYear(), now.getMonth(), now.getDate(), 10, 30),
         name: 'Morning Event',
         classes: "color-1"
@@ -56,17 +60,6 @@ class DayScheduleContainer extends Component {
     this.handleCellSelection = this.handleCellSelection.bind(this);
     this.handleItemChange = this.handleItemChange.bind(this);
     this.handleItemSize = this.handleItemSize.bind(this);
-    this.handleItemEdit = this.handleItemEdit.bind(this);
-    this.handleRangeSelection = this.handleRangeSelection.bind(this);
-  }
-
-  // handleEventUpdate(event) {
-
-  // }
-  componentDidMount() {
-    // this.setState({ items: items });
-    // console.log(this.state.items);
-    // console.log(this.state.startDate)
   }
 
   componentWillReceiveProps(next, last) {
@@ -74,33 +67,18 @@ class DayScheduleContainer extends Component {
       this.setState({ items: next.items })
     }
   }
-
-  //drag and drop
+  // drag and drop
   handleItemChange(items, item) {
     this.setState({ items: items })
-    console.log('handleItemChange', item)
   }
-  //drag and resize
+  // drag and resize
   handleItemSize(items, item) {
     this.setState({ items: items })
-    console.log('handleItemSize', item)
   }
-
+  // grabs selected cell and is required
   handleCellSelection(item) {
     this.setState({ selected: [item] })
-    console.log('handleCellSelection', item)
   }
-
-  handleRangeSelection(selected) {
-    this.setState({ selected: selected})
-    console.log('handleRangeSelection', selected)
-  }
-
-  handleItemEdit(item) {
-    console.log('handleItemEdit', item)
-  }
-
-
 
   render() {
     const {
@@ -109,7 +87,7 @@ class DayScheduleContainer extends Component {
     } = this.state;
 
     const maxDate = moment(startDate).add(2, 'd');
-
+    // display event blocks with description and time
     const AgendaItem = function(props) {
       const startHour = moment(props.item.startDateTime).format("h:mm");
       const endHour = moment(props.item.endDateTime).format("h:mm");
@@ -136,12 +114,10 @@ class DayScheduleContainer extends Component {
         autoScale={false}
         fixedHeader={true}
         onChangeEvent={this.handleItemChange}
-        onItemEdit={this.handleItemEdit}
-        onCellSelect={this.handleCellSelection}
-        onRangeSelection={this.handleRangeSelection} />
+        onChangeDuration={this.handleItemSize}
+        onCellSelect={this.handleCellSelection} />
     );
   }
 }
-
 
 export default DayScheduleContainer;
